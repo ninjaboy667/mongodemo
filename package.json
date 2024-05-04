@@ -1,0 +1,21 @@
+{
+    "type": "module",
+    "name": "mongodemo",
+    "version": "1.0.0",
+    "description": "demo of using mongodb to deliver an object",
+    "main": "script.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon public\\server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "nodemon": "^3.1.0"
+    },
+    "dependencies": {
+        "express": "^4.19.2",
+        "mongodb": "^6.6.0"
+    }
+}

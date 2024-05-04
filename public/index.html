@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query DB</title>
+    <style>
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <button id="queryBtn" style="margin-top: 20px;">Query DB</button>
+    </div>
+    <div id="tableContainer" class="center" style="margin-top: 20px;"></div>
+
+    <script>
+        document.getElementById('queryBtn').addEventListener('click', async () => {
+            const response = await fetch('/data');
+            const data = await response.json();
+
+            const tableContainer = document.getElementById('tableContainer');
+            tableContainer.innerHTML = '';
+
+            const table = document.createElement('table');
+            table.classList.add('center');
+            table.style.borderCollapse = 'collapse';
+
+            for (const section in data) {
+                const tr = document.createElement('tr');
+                const td1 = document.createElement('td');
+                td1.textContent = section;
+                tr.appendChild(td1);
+
+                const td2 = document.createElement('td');
+                const subTable = document.createElement('table');
+                subTable.style.borderCollapse = 'collapse';
+
+                for (const subsection in data[section]) {
+                    const subTr = document.createElement('tr');
+                    const subTd1 = document.createElement('td');
+                    subTd1.textContent = subsection;
+                    subTr.appendChild(subTd1);
+
+                    const subTd2 = document.createElement('td');
+                    subTd2.textContent = data[section][subsection];
+                    subTr.appendChild(subTd2);
+
+                    subTable.appendChild(subTr);
+                }
+
+                td2.appendChild(subTable);
+                tr.appendChild(td2);
+                table.appendChild(tr);
+            }
+
+            tableContainer.appendChild(table);
+        });
+    </script>
+</body>
+</html>
